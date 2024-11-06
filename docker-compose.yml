@@ -15,7 +15,7 @@ services:
 #    command: /mosquitto/config/mosquitto.conf
 
   influxdb:
-    image: influxdb
+    image: influxdb:1.11.7
     networks:
       - iot_network
     environment:
