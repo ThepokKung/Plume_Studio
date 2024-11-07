@@ -25,6 +25,6 @@ sudo chmod -R 755 Plume_Project/data
 docker-compose up -d
 ```
 
-## Contrack 
+## Contract 
 
 Kraiwich Vichakhot - [@ThepokKung](https://www.github.com/ThepokKung)
