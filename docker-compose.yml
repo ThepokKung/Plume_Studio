@@ -10,7 +10,7 @@ services:
     volumes:
       - ./data/mosquitto_data:/mosquitto/data           # Persist data for Mosquitto
       - ./data/mosquitto_logs:/mosquitto/log            # Persist logs for Mosquitto
-      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf  # Configuration file for Mosquitto
+      - ./config/mosquitto.conf:/mosquitto/config/mosquitto.conf  # Configuration file for Mosquitto
 
   influxdb:
     image: influxdb:1.11.7
