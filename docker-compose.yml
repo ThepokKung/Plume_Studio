@@ -8,14 +8,13 @@ services:
       - "1883:1883"
     restart: unless-stopped
     volumes:
-      - mosquitto_data:/mosquitto/data           # Persist data for Mosquitto
-      - mosquitto_logs:/mosquitto/log             # Persist logs for Mosquitto
-      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-#      - ~/Plume_Project/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-#    command: /mosquitto/config/mosquitto.conf
+      - ./data/mosquitto_data:/mosquitto/data           # Persist data for Mosquitto
+      - ./data/mosquitto_logs:/mosquitto/log            # Persist logs for Mosquitto
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf  # Configuration file for Mosquitto
 
   influxdb:
     image: influxdb:1.11.7
+    user: "0:0"
     networks:
       - iot_network
     environment:
@@ -26,17 +25,18 @@ services:
       - "8086:8086"
     restart: unless-stopped
     volumes:
-      - influxdb_data:/var/lib/influxdb          # Persist data for InfluxDB
+      - ./data/influxdb_data:/var/lib/influxdb          # Persist data for InfluxDB
 
   grafana:
     image: grafana/grafana
+    user: "0:0"
     networks:
       - iot_network
     ports:
       - "3000:3000"
     restart: unless-stopped
     volumes:
-      - grafana_data:/var/lib/grafana            # Persist data for Grafana
+      - ./data/grafana_data:/var/lib/grafana            # Persist data for Grafana
 
   nodered:
     image: nodered/node-red
@@ -46,16 +46,8 @@ services:
       - "1880:1880"
     restart: unless-stopped
     volumes:
-      - nodered_data:/data                       # Persist data for Node-RED
+      - ./data/nodered_data:/data                       # Persist data for Node-RED
 
 networks:
   iot_network:
     driver: bridge
-
-volumes:
-  mosquitto_data:
-  mosquitto_logs:
-  influxdb_data:
-  grafana_data:
-  nodered_data:
-

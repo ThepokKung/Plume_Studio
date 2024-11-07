@@ -1,0 +1,156 @@
+[
+    {
+        "id": "b9b5890a72004439",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "66e5917bf73f8456",
+        "type": "influxdb",
+        "hostname": "192.168.1.150",
+        "port": "8086",
+        "protocol": "http",
+        "database": "kraiwich_test_only",
+        "name": "Kraiwich_test_only",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.8-flux",
+        "url": "http://192.168.1.150:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "b62b28ecf294ac9b",
+        "type": "mqtt-broker",
+        "name": "Kraiwich_Test_only",
+        "broker": "192.168.1.150",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "829ffa3781abf62f",
+        "type": "influxdb out",
+        "z": "b9b5890a72004439",
+        "influxdb": "66e5917bf73f8456",
+        "name": "Kraiwich Test",
+        "measurement": "test",
+        "precision": "u",
+        "retentionPolicy": "1",
+        "database": "kraiwich_test_only",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 810,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5326992a3e6af766",
+        "type": "inject",
+        "z": "b9b5890a72004439",
+        "name": "Test_Kraiwich",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"sensor\":\"temperature\",\"value\":23.5,\"unit\":\"Celsius\"}",
+        "payloadType": "json",
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "829ffa3781abf62f",
+                "a318944b4c51791a"
+            ]
+        ]
+    },
+    {
+        "id": "a318944b4c51791a",
+        "type": "debug",
+        "z": "b9b5890a72004439",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "jsonata",
+        "x": 810,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "62ee610ceb8abcba",
+        "type": "mqtt in",
+        "z": "b9b5890a72004439",
+        "name": "kraiwich_test_only",
+        "topic": "test",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b62b28ecf294ac9b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 530,
+        "y": 420,
+        "wires": [
+            [
+                "798f58490474b4ce",
+                "829ffa3781abf62f"
+            ]
+        ]
+    },
+    {
+        "id": "798f58490474b4ce",
+        "type": "debug",
+        "z": "b9b5890a72004439",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "jsonata",
+        "x": 810,
+        "y": 420,
+        "wires": []
+    }
+]
